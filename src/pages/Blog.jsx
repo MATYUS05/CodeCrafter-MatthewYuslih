@@ -1,26 +1,17 @@
 import { useEffect, useState } from "react";
 import CardNews from "../components/CardNews";
-import axios from "axios";
 import AnimationWrapper from "../components/AnimationWrapper";
+import newsData from "../components/News.json"; // Import data dari News.json
 
 const Blog = () => {
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    // Ambil data dari NewsAPI
+    // Ambil data dari News.json
     const fetchNews = async () => {
       try {
-        const response = await axios.get(
-          "https://newsapi.org/v2/top-headlines",
-          {
-            params: {
-              apiKey: "3fbd14659231481bb8ea8a57584cd579", // Ganti dengan API Key Anda
-              language: "en",
-              pageSize: 24, // Jumlah artikel yang diambil
-            },
-          }
-        );
-        setArticles(response.data.articles);
+        // Simulasi fetch data dari News.json
+        setArticles(newsData.articles);
       } catch (error) {
         console.error("Error fetching news:", error);
       }
@@ -45,6 +36,7 @@ const Blog = () => {
               image={article.urlToImage || "https://via.placeholder.com/600x400"}
               title={article.title}
               description={article.description || "No description available."}
+              url={article.url}
             />
           ))}
         </div>
